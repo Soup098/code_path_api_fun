@@ -1,46 +1,42 @@
 <!-- (This is a comment) INSTRUCTIONS: Go through this page and fill out any **bolded** entries with their correct values.-->
 
-# AND101 Project 5 - Choose Your Own API
+# AND101 Project 6 - CYOAPI Part 2: RecyclerView Edition
 
 Submitted by: Alex Surprenant
 
-Time spent: 2.5 hours spent in total
+Time spent: 3 hours spent in total
 
 ## Summary
 
-API FUN is an android app that Makes a cool API call to the NASA API
+Rover Madness!!! is an android app that shows images from the curiosity rover on mars, and displays them with some data about the sol date, and which camera is used in the process
 
-If I had to describe this project in three (3) emojis, they would be: 🚀👾🛰️
+This is a rebuild from my project 5, as I did not like the previous API used, and I wanted one that generated more than one image.
+
+If I had to describe this project in three (3) emojis, they would be: ☀️👽🌚
 
 ## Application Features
-
-<!-- (This is a comment) Please be sure to change the [ ] to [x] for any features you completed.  If a feature is not checked [x], you might miss the points for that item! -->
 
 The following REQUIRED features are completed:
 
 - [X] Make an API call to an API of your choice using AsyncHTTPClient
-- [X] Display at least three (3) pieces of data for each API entry retrieved
-- [X] A working Button requests a new API entry and updates the data displayed
+- [X] Implement a RecyclerView to display a list of entries from the API
+- [X] Display at least three (3) pieces of data for each RecyclerView item
 
 The following STRETCH features are implemented:
 
-- [ ] Add a query to the API request
-  - The query I added is **FILL IN HERE**
-- [ ] Build a UI to allow users to add that query
+- [ ] Add a UI element for the user to interact with API further
+- [ ] Show a `Toast` or `Snackbar` when an item is clicked
+- [ ] Add item dividers with `DividerItemDecoration`
 
 The following EXTRA features are implemented:
 
 - [ ] List anything else that you added to improve the app!
 
-## API Choice
-
-My chosen API for this project is Nasa's APOD API
-
 ## Video Demo
 
 Here's a video / GIF that demos all of the app's implemented features:
 
-![me](https://github.com/Soup098/code_path_api_fun/blob/master/apigif.gif)
+![me](https://github.com/Soup098/code_path_api_fun/blob/master/apigifnew.gif)
 
 GIF created with ScreenToGif
 
