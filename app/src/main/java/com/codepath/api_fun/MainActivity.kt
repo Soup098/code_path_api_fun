@@ -2,79 +2,64 @@ package com.codepath.api_fun
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
-import android.widget.Button
-import android.widget.ImageView
-import org.json.JSONObject
-import com.bumptech.glide.Glide
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.codepath.asynchttpclient.AsyncHttpClient
-import com.codepath.asynchttpclient.RequestParams
-import com.codepath.asynchttpclient.callback.TextHttpResponseHandler
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import okhttp3.Headers
+import org.json.JSONException
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var imageView: ImageView
-    lateinit var titleText: TextView
-    lateinit var explanationText: TextView
-    lateinit var refreshButton: Button
+    private lateinit var rvPhotos: RecyclerView
+    private val photos = mutableListOf<MarsPhoto>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        imageView = findViewById(R.id.imageView)
-        titleText = findViewById(R.id.titleText)
-        explanationText = findViewById(R.id.explanationText)
-        refreshButton = findViewById(R.id.refreshButton)
 
-        fetchAPOD()
+        rvPhotos = findViewById(R.id.photosRecyclerView)
+        val photoAdapter = PhotoAdapter(photos)
+        rvPhotos.adapter = photoAdapter
+        rvPhotos.layoutManager = LinearLayoutManager(this)
 
-        refreshButton.setOnClickListener(){
-            fetchAPOD()
-        }
-    }
-
-    private fun fetchAPOD(){
         val client = AsyncHttpClient()
-        val params = RequestParams()
-        params["api_key"] = "QtL0L78y2DWwjkVrm1rd5jmtfyf7KRJJkqSedUoI"
+        val apiKey = "fU8akJc3BSNS3Q938d2Ua4xUdRJvAuJAXfx4ZpZt"
+        val url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1500&api_key=$apiKey"
 
-        client["https://api.nasa.gov/planetary/apod", params, object :
-            TextHttpResponseHandler() {
-            override fun onSuccess(statusCode: Int, headers: Headers, response: String) {
-                Log.d("NASA_API", "Success response: $response")
+        client.get(url, object : JsonHttpResponseHandler() {
+            override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
+                Log.d("NASA_API", "Success: $json")
+
                 try {
-                    val json = JSONObject(response)
-                    val imageUrl = json.getString("url")
-                    val title = json.getString("title")
-                    val explanation = json.getString("explanation")
+                    val photoArray = json.jsonObject.getJSONArray("photos")
+                    for (i in 0 until photoArray.length()) {
+                        val photoObj = photoArray.getJSONObject(i)
 
-                    titleText.text = title
-                    explanationText.text = explanation
-                    Glide.with(this@MainActivity).load(imageUrl).into(imageView)
-                } catch (e:Exception){
-                    Log.e("NASA_API", "JSON Parsing error: ${e.message}")
+                        val imgSrc = photoObj.getString("img_src")
+                        val roverName = photoObj.getJSONObject("rover").getString("name")
+                        val cameraFullName =
+                            photoObj.getJSONObject("camera").getString("full_name")
+                        val sol = photoObj.getInt("sol")
+
+                        val photo = MarsPhoto(imgSrc, roverName, cameraFullName, sol)
+                        photos.add(photo)
+                    }
+
+                    photoAdapter.notifyDataSetChanged()
+                } catch (e: JSONException) {
+                    Log.e("NASA_API", "JSON Error: ${e.localizedMessage}")
                 }
             }
 
             override fun onFailure(
                 statusCode: Int,
                 headers: Headers?,
-                errorResponse: String,
-                t: Throwable?
+                response: String?,
+                throwable: Throwable?
             ) {
-                Log.e("NASA_API", "Failure: $statusCode $errorResponse")
+                Log.e("NASA_API", "Failed: $response")
             }
-        }]
+        })
     }
 }
