@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_margin="8dp"
     android:layout_height="wrap_content"
-    android:elevation="4dp">
+    style = "@style/Base.Theme.Api_fun">
 
     <LinearLayout
         android:orientation="vertical"
@@ -21,6 +21,7 @@
             android:id="@+id/roverNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/space_mono_bold"
             android:text="Rover Name"
             android:textStyle="bold" />
 
@@ -28,12 +29,14 @@
             android:id="@+id/cameraNameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/space_mono"
             android:text="Camera Name" />
 
         <TextView
             android:id="@+id/solDateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/space_mono"
             android:text="Sol date" />
 
     </LinearLayout>
