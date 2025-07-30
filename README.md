@@ -1,32 +1,33 @@
 <!-- (This is a comment) INSTRUCTIONS: Go through this page and fill out any **bolded** entries with their correct values.-->
 
-# AND101 Project 6 - CYOAPI Part 2: RecyclerView Edition
+# AND101 Project 7 - CYOAPI Part 3: Beautified
 
 Submitted by: Alex Surprenant
 
-Time spent: 3 hours spent in total
+Time spent: 2 hours spent in total
 
 ## Summary
 
-Rover Madness!!! is an android app that shows images from the curiosity rover on mars, and displays them with some data about the sol date, and which camera is used in the process
+API FUN!!!! is an android app that pulls data from the NASA API and displays cool visuals from the mars rover curiosity
 
-This is a rebuild from my project 5, as I did not like the previous API used, and I wanted one that generated more than one image.
-
-If I had to describe this project in three (3) emojis, they would be: ☀️👽🌚
+If I had to describe this project in three (3) emojis, they would be: 🎡🥳🎇
 
 ## Application Features
 
+<!-- (This is a comment) Please be sure to change the [ ] to [x] for any features you completed.  If a feature is not checked [x], you might miss the points for that item! -->
+
 The following REQUIRED features are completed:
 
-- [X] Make an API call to an API of your choice using AsyncHTTPClient
-- [X] Implement a RecyclerView to display a list of entries from the API
-- [X] Display at least three (3) pieces of data for each RecyclerView item
+- [X] App contains a RecyclerView that displays a list of scrollable data
+- [X] App displays at least two (2) pieces of data for each RecyclerView item
+- [X] Use a downloadable font with custom color and size
+- [X] Modify the theme of the app in `themes.xml`
+- [X] Define and apply at least one style in **either** `themes.xml` or a new file `styles.xml`
 
 The following STRETCH features are implemented:
 
-- [ ] Add a UI element for the user to interact with API further
-- [ ] Show a `Toast` or `Snackbar` when an item is clicked
-- [ ] Add item dividers with `DividerItemDecoration`
+- [ ] Update the night theme to use different versions of styles when in dark mode
+- [ ] Use different drawables when in dark mode
 
 The following EXTRA features are implemented:
 
@@ -36,18 +37,14 @@ The following EXTRA features are implemented:
 
 Here's a video / GIF that demos all of the app's implemented features:
 
-![me](https://github.com/Soup098/code_path_api_fun/blob/master/apigifnew.gif)
+![me](https://github.com/Soup098/code_path_api_fun/blob/master/apigifthemes.gif)
 
 GIF created with ScreenToGif
 
-<!-- Recommended tools:
-- [Kap](https://getkap.co/) for macOS
-- [ScreenToGif](https://www.screentogif.com/) for Windows
-- [peek](https://github.com/phw/peek) for Linux. -->
-
 ## Notes
 
-Here's a place for any other notes on the app, it's creation process, or what you learned this unit!
+- I downloaded the following fonts using the downloadable fonts in the fontFamily attribute of the textViews in item_photo.xml
+- I added a cardElevation and cardCornerRadius attribute in the themes.xml file to give the cards a little nicer UI and pop.
 
 ## License
 
@@ -60,6 +57,10 @@ You may obtain a copy of the License at
     http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
